@@ -1,21 +1,33 @@
-import App from "../App";
 import Home from "../views/Home";
-import About from "../views/About";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-// 两种路由模式的组件,BrowserRouter(History模式) HashRouter(Hash模式)
-// const baseRouter = ()=>{
-//     return()
-// }
-// 以上写法简写为：
-const baseRouter = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route path="/" element={<Navigate to="/home"></Navigate>}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-      </Route>
-    </Routes>
-  </BrowserRouter>
-);
-export default baseRouter;
+import { Navigate } from "react-router-dom";
+import React, { lazy } from "react";
+const User = lazy(() => import("../views/User"));
+const About = lazy(() => import("../views/About"));
+// 懒加载模式需要我们给他添加一个Loading组件
+const routes = [
+  {
+    path: "/",
+    element: <Navigate to="/home" />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/about",
+    element: (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <About />
+      </React.Suspense>
+    ),
+  },
+  {
+    path: "/user",
+    element: (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <User />
+      </React.Suspense>
+    ),
+  },
+];
+export default routes;
