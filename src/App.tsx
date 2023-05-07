@@ -1,12 +1,11 @@
-import Comp1 from "./components/Comp1/index";
-import Comp2 from "./components/Comp2/index";
+import { Outlet, Link } from "react-router-dom";
 function App() {
   return (
     <>
       <div className="App">
-        顶级组件
-        <Comp1 />
-        <Comp2 />
+        <Link to="/home">Home</Link>
+        <Link to="/about">About</Link>
+        <Outlet />
       </div>
     </>
   );
