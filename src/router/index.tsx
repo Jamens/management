@@ -5,6 +5,7 @@ const User = lazy(() => import("../views/User"));
 const About = lazy(() => import("../views/About"));
 const Page1 = lazy(() => import("../views/Page1"));
 const Page2 = lazy(() => import("../views/Page2"));
+const Page301 = lazy(() => import("../views/Page301"));
 // 懒加载模式需要我们给外面一层嵌套Loading提示加载组件
 const withLoadingComponent = (comp: JSX.Element) => (
   <React.Suspense fallback={<div>Loading...</div>}>{comp}</React.Suspense>
@@ -26,7 +27,15 @@ const routes = [
         path: "/page2",
         element: withLoadingComponent(<Page2 />),
       },
+      {
+        path: "/page3/page301",
+        element: withLoadingComponent(<Page301 />),
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <Navigate to="/page1" />,
   },
   // {
   //   path: "/home",
