@@ -2,13 +2,11 @@ import type { MenuProps } from "antd";
 import React, { useState } from "react";
 import {
   DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
-  TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
 const items: MenuItem[] = [
   {
@@ -65,6 +63,36 @@ const Comp: React.FC = () => {
   const menuClick = (e: { key: string }) => {
     navigateTo(e.key);
   };
+  const currentRoute = useLocation();
+  function findKey(item: { key: string }) {
+    return item.key === currentRoute.pathname;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let firstOpenKey = "";
+  // for (let i = 0; i < items.length; i++) {
+  //   if (
+  //     items[i]!["children"] &&
+  //     items[i]!["children"].length > 0 &&
+  //     items[i]!["children"].find(findKey)
+  //   ) {
+  //     firstOpenKey = items[i]!.key as string;
+  //     break;
+  //   }
+  // }
+  items.forEach((item, i) => {
+    if (
+      item &&
+      item[i] &&
+      item[i]["children"] &&
+      item[i]["children"].length > 0 &&
+      item[i]["children"].find(findKey)
+    ) {
+      firstOpenKey = item[i].key as string;
+      return;
+    }
+    console.log(i);
+  });
+
   const [openKeys, setOpenKeys] = useState([""]);
   const menuChange = (keys: string[]) => {
     console.log(keys);
@@ -73,7 +101,7 @@ const Comp: React.FC = () => {
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={["/page1"]}
+      defaultSelectedKeys={[currentRoute.pathname]}
       mode="inline"
       items={items}
       onClick={menuClick}
