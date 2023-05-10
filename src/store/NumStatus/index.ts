@@ -3,10 +3,10 @@ export default {
     num: 20,
   },
   action: {
-    add(newState: number, action: { type: string }) {
+    add(newState: { num: number }, action: { type: string }) {
       newState.num++;
     },
-    add1(newState: number, action: { type: string; val: number }) {
+    add1(newState: { num: number }, action: { type: string; val: number }) {
       newState.num += action.val;
     },
   },
