@@ -3,14 +3,16 @@
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
+    "allowJs": false,
     "skipLibCheck": true,
+    "esModuleInterop": false,
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     },
+    "ignoreDeprecations": "5.0",
     "suppressImplicitAnyIndexErrors": true,
-
-    /* Bundler mode */
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
