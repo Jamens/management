@@ -1,11 +1,18 @@
-export default {
+const store = {
   state: {
     arr: [10, 20, 30],
   },
-  action: {
+  actions: {
     arrAdd(newState: { arr: number[] }, action: { type: string; val: number }) {
       newState.arr.push(action.val);
     },
   },
-  arrAdd: "arrAdd",
+  actionName: {
+    arrAdd: "arrAdd",
+  },
 };
+let actionName = {};
+for (let key in store.actions) {
+  actionName[key] = key;
+}
+export default store;
